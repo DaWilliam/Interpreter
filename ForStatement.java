@@ -1,7 +1,7 @@
 
 public class ForStatement implements Statement {
 
-	private ArithmeticExpression start;
+	private Id var;
 	
 	private Block blk;
 	
@@ -11,15 +11,15 @@ public class ForStatement implements Statement {
 	 * @param blk cannot be null
 	 * @throws IllegalArgumentException if either argument is 
 	 */
-	public ForStatement(ArithmeticExpression start, Block blk, ArithmeticExpression end)
+	public ForStatement(Id var, Block blk, ArithmeticExpression end)
 	{
-		if (start == null)
+		if (var == null)
 			throw new IllegalArgumentException ("null arithmetic expression argument");
 		if (blk == null)
 			throw new IllegalArgumentException ("null block argument");
 		if(end == null)
 			throw new IllegalArgumentException ("null arithmetic argument");
-		this.start = start;
+		this.var = var;
 		this.blk = blk;
 		this.end = end;
 	}
@@ -27,7 +27,10 @@ public class ForStatement implements Statement {
 	@Override
 	public void execute()
 	{		
-		for(int i = start.evaluate(); i < end.evaluate(); i++)
+		for(int i = var.evaluate(); i <= end.evaluate(); i++)
+		{
+			Memory.store(var.getChar(), i);
 			blk.execute();
+		}
 	}
 }
