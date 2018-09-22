@@ -6,6 +6,7 @@ public class Interpreter {
 	{
 		Reader r = new Reader("Input1.txt");
 		Token t = new Token();
+		Token p = ur butt;
 
 	}
 	
