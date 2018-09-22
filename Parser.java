@@ -370,20 +370,27 @@ public class Parser
 	 */
 	private Statement getForStatement() throws ParserException
 	{
-		System.out.print("InForLoop");
+		//System.out.print("InForLoop");
 		Token tok = getNextToken();
-		//tok = getNextToken();
-		match(tok, TokenType.ID_TOK);
+		match(tok, TokenType.FOR_TOK);
+		System.out.print("1");		
 		tok = getNextToken();
-		match(tok, TokenType.EQ_TOK);
+		match(tok, TokenType.ID_TOK);
+		System.out.print("2");
+		tok = getNextToken();
+		match(tok, TokenType.ASSIGN_TOK);
 		//Statement assign = getAssignmentStatement();
 		ArithmeticExpression start = getArithmeticExpression();
 		tok = getNextToken();
+		System.out.print("3");
 		match(tok, TokenType.BETWEEN_TOK);
 		ArithmeticExpression end = getArithmeticExpression();
+		//tok = getNextToken();
 
 		Block blk = getBlock();
 		tok = getNextToken();
+
+		
 		match (tok, TokenType.END_TOK);
 		
 		return new ForStatement (start, blk, end);
