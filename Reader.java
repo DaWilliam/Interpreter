@@ -6,13 +6,12 @@ import java.util.Scanner;
 public class Reader {
 	//String fileName;
 	ArrayList<String> lines;
-	ArrayList<String> firstWords;	
-	String[] tokens;
+	char[][] charArray;
 	
 	public Reader(String fileName) throws FileNotFoundException
 	{		
 		lines = new ArrayList<String>();
-		firstWords = new ArrayList<String>();		
+			
 		Scanner code = new Scanner(new File(fileName));
 	
 		while(code.hasNextLine())
@@ -21,8 +20,15 @@ public class Reader {
 		}
 		
 		code.close();
-		tokens = new String[lines.size()];
-		tokens = (String[])lines.toArray();
+				
+		charArray = new char[lines.size()][100];
+		
+		for(int i = 0; i < lines.size(); i++)
+		{			
+			charArray[i] = lines.get(i).toCharArray();
+			
+		}
+		//tokens = (String[])lines.toArray();
 				
 		/*
 		for(int i = 0; i < lines.size(); i++)
@@ -32,16 +38,20 @@ public class Reader {
 			else
 				firstWords.add(lines.get(i).substring(0, lines.get(i).indexOf(" ")));
 		}
-		*/
+		
 		for(int i = 0; i < tokens.length; i++)
 		{
-			
+			//System.out.print("This ");
+			//System.out.print("" + tokens[4]);
+			//System.out.print("is ");
+			System.out.println("" + tokens[i]);
 		}
 		for(int i = 0; i < lines.size(); i++)
 		{
 			//System.out.println(firstWords.get(i));			
-			System.out.println(lines.get(i));
+			//System.out.println(lines.get(i));
 		}
+		*/
 		
 	}
 	
@@ -50,8 +60,10 @@ public class Reader {
 		return lines.get(indexIn);
 	}
 	
+	/*
 	public String getFirstWord(int indexIn)
 	{
 		return firstWords.get(indexIn);
 	}
+	*/
 }
