@@ -1,3 +1,9 @@
+/*
+Team: David Waldorf, Richard Luthringshauser, William Shu
+Date: 9/21/2018
+Changes: Added getForStatement() method on line 376.
+	 Added FOR_TOK lookup at line 91, and 197
+*/
 import java.io.FileNotFoundException;
 
 /**
@@ -370,15 +376,15 @@ public class Parser
 	 */
 	private Statement getForStatement() throws ParserException
 	{
-		Token tok = getNextToken();
-		match(tok, TokenType.FOR_TOK);		
-		Statement assign = getAssignmentStatement();
-		Id id = ((AssignmentStatement)assign).var;
-		Memory.store(id.getChar(), 3);
-		tok = getNextToken();
+		Token tok = getNextToken();				//	Looks for the next 'for' token
+		match(tok, TokenType.FOR_TOK);			
+		Statement assign = getAssignmentStatement();		//	Gets the initial for loop assignment statement
+		Id id = ((AssignmentStatement)assign).var;		//	Get the variable that the value was assigned to
+		Memory.store(id.getChar(), 3);				
+		tok = getNextToken();					//	Find the between token
 		match(tok, TokenType.BETWEEN_TOK);
-		ArithmeticExpression end = getArithmeticExpression();
-		Block blk = getBlock();
+		ArithmeticExpression end = getArithmeticExpression();	//	Get the end value of the for loop
+		Block blk = getBlock();					//	Get the block of statements inside the for loop
 		tok = getNextToken();
 		match (tok, TokenType.END_TOK);
 		return new ForStatement (id, blk, end);
